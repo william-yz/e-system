@@ -142,7 +142,7 @@ module.exports.initHelmetHeaders = function (app) {
 /**
  * Configure the modules ACL policies
  */
-module.exports.initModulesServerPolicies = function (app) {
+module.exports.initModulesServerPolicies = function () {
   // Globbing policy files
   config.files.server.policies.forEach(function (policyPath) {
     require(path.resolve(policyPath)).invokeRolesPolicies();

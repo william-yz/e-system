@@ -47,7 +47,7 @@ gulp.task('watch', function() {
   gulp.watch(defaultAssets.server.views).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.server.allJS, ['eslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.views).on('change', plugins.livereload.changed);
-  gulp.watch(defaultAssets.client.js, ['eslint']).on('change', plugins.livereload.changed);
+  gulp.watch(defaultAssets.client.js, ['eslint','es6']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.css, ['csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.sass, ['sass', 'csslint']).on('change', plugins.livereload.changed);
   gulp.watch(defaultAssets.client.less, ['less', 'csslint']).on('change', plugins.livereload.changed);
@@ -110,6 +110,14 @@ gulp.task('less', function () {
       file.dirname = file.dirname.replace(path.sep + 'less', path.sep + 'css');
     }))
     .pipe(gulp.dest('./modules/'));
+});
+
+gulp.task("es6", function () {
+  return gulp.src(defaultAssets.client.js)
+    .pipe(plugins.babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest("public/dist"));
 });
 
 // Mocha tests task
@@ -180,7 +188,7 @@ gulp.task('test', function(done) {
 
 // Run the project in development mode
 gulp.task('default', function(done) {
-  runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', 'lint', 'es6', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode

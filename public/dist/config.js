@@ -1,13 +1,14 @@
 'use strict';
 
 // Init the application configuration module for AngularJS application
-window.ApplicationConfiguration = (function () {
+
+window.ApplicationConfiguration = function () {
   // Init module configuration options
   var applicationModuleName = 'e-system';
   var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload'];
 
   // Add a new vertical module
-  var registerModule = function (moduleName, dependencies) {
+  var registerModule = function registerModule(moduleName, dependencies) {
     // Create angular module
     angular.module(moduleName, dependencies || []);
 
@@ -20,4 +21,4 @@ window.ApplicationConfiguration = (function () {
     applicationModuleVendorDependencies: applicationModuleVendorDependencies,
     registerModule: registerModule
   };
-})();
+}();

@@ -1,33 +1,32 @@
 'use strict';
 
 //Start by defining the main module and adding the module dependencies
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 
 // Setting HTML5 Location Mode
-angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider',
-  function ($locationProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('!');
-  }
-]);
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider', function ($locationProvider) {
+  $locationProvider.html5Mode(true).hashPrefix('!');
+}]);
 
 'use strict';
 
 // Authentication service for user variables
-angular.module(ApplicationConfiguration.applicationModuleName).factory('Authentication', ['$window',
-  function () {
-    var auth = {
-      user: {
-        roles : ['admin']
-      }
-    };
+angular.module(ApplicationConfiguration.applicationModuleName).factory('Authentication', ['$window', function () {
+  var auth = {
+    user: {
+      roles: ['admin']
+    }
+  };
 
-    return auth;
-  }
-]);
+  return auth;
+}]);
 
 angular.module(ApplicationConfiguration.applicationModuleName).run(function ($rootScope, $state, Authentication) {
   // Check authentication before changing state
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams/*, fromState, fromParams*/) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams /*, fromState, fromParams*/) {
     if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
       var allowed = false;
       toState.data.roles.forEach(function (role) {
@@ -69,11 +68,10 @@ angular.element(document).ready(function () {
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
 
-class A {
-  constructor() {
-    this.a = 's';
+var A = function A() {
+  _classCallCheck(this, A);
 
-  }
-}
+  this.a = 's';
+};
 
 var a = new A();
